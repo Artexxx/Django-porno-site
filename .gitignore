@@ -1,0 +1,6 @@
+venv/*
+.idea/*
+VideoSait/media/*
+VideoSait/static/*
+pyvenv.cfg
+db.sqlite3
