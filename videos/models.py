@@ -10,6 +10,9 @@ class Video(Model):
     author = models.CharField(max_length=100, default="", blank=True, verbose_name="Автор")
     date = models.DateField(verbose_name="Дата", default=None, blank=True, null=True)
     watched_count = models.IntegerField(verbose_name="Количество просмотров", blank=True, default=0)
+    watched_like = models.IntegerField(verbose_name="Количество лайков", blank=True, default=0)
+    opisanie = models.TextField(max_length=10000, default='', blank=True, verbose_name='Описание')
 
     def __str__(self):
         return self.name
+
