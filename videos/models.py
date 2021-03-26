@@ -3,16 +3,18 @@ from django.db.models import Model
 
 
 class Video(Model):
-    name = models.CharField(max_length=100, default="", verbose_name="Название")
+    title = models.CharField(verbose_name="Название", max_length=100, default="")
+    desc = models.TextField(verbose_name='Описание', max_length=10000, default='', blank=True)
+
     image = models.FileField(verbose_name="Картика", upload_to="images")
     video = models.FileField(verbose_name="Видео", upload_to="videos")
-
-    author = models.CharField(max_length=100, default="", blank=True, verbose_name="Автор")
+    author = models.CharField(verbose_name="Автор", max_length=100, default="", blank=True)
     date = models.DateField(verbose_name="Дата", default=None, blank=True, null=True)
-    watched_count = models.IntegerField(verbose_name="Количество просмотров", blank=True, default=0)
-    watched_like = models.IntegerField(verbose_name="Количество лайков", blank=True, default=0)
-    opisanie = models.TextField(max_length=10000, default='', blank=True, verbose_name='Описание')
+
+    views = models.IntegerField(verbose_name="Количество просмотров", blank=True, default=0)
+    likes = models.IntegerField(verbose_name="Количество лайков", blank=True, default=0)
+
 
     def __str__(self):
-        return self.name
+        return self.title
 

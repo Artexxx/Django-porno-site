@@ -1,5 +1,4 @@
 from django.shortcuts import render
-
 from videos.models import Video
 
 
@@ -10,7 +9,7 @@ def get_videos(request):
 
     context = {
         "videos": videos,
-    }
+     }
 
     return render(request, template, context)
 
@@ -20,8 +19,12 @@ def get_video(request, video_id):
 
     video = Video.objects.get(id=video_id)
 
+    # Увеличичение количества просмотров
+    video.views += 1
+    video.save()
+
+
     context = {
         "video": video,
     }
-
     return render(request, template, context)
