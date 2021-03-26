@@ -57,10 +57,14 @@
 <div id="ramka_dlya_bolshogo_diva">
 
 <a href="http://127.0.0.1:8000/videos/id/{{video.id}}/">
-<video width="300" height="200" controls>
-  <source src="{{video.video.url}}" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
+    <div id="videosList">
+        <div class="video">
+            <video class="thevideo" loop preload="none" width="300" height="200" muted="muted">
+              <source src="{{video.video.url}}" type="video/mp4"/>
+              Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
 </a>
 
 
@@ -79,5 +83,6 @@
 </div>
 
 {% endfor %}
-
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="/static/js/hover_image_video.js"> </script>
 </body>
