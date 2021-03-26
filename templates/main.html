@@ -11,32 +11,72 @@
             border: 1px solid #ff0000;
             display: inline-block
         }
+
+        #like_count {
+            margin-top: 0px;
+
+            display: inline-block
+        }
+
+        #like_icon {
+            margin-top: 0px;
+            margin-left: 5px;
+            position: absolute;
+        }
+
+        #name_author{
+            margin-top: 0px;
+            margin-left: 40px;
+            position: absolute;
+
+            display: inline-block
+        }
+
+        #nazvanie_video{
+            margin: 5px;
+
+            display: inline-block
+        }
+
+        #information{
+
+                height: 50px;
+        }
+
+        #ramka_dlya_bolshogo_diva{
+
+                height: 300px;
+                display: inline-block
+        }
     </style>
 </head>
 
 <body>
 
 {% for video in videos %}
-<p> {{video.name}} </p>
-<img src="{{video.image.url}}" width="200px" height="200px"/>
+<div id="ramka_dlya_bolshogo_diva">
 
 <a href="http://127.0.0.1:8000/videos/id/{{video.id}}/">
-<video width="1080" height="720" controls>
+<video width="300" height="200" controls>
   <source src="{{video.video.url}}" type="video/mp4"/>
   Your browser does not support the video tag.
 </video>
 </a>
+
+
+<div id="information">
+  <p id="nazvanie_video">  {{video.name}} </p>
+</div>
 <div>
-    <p class="border">   Your browser does not support the video tag.
- </p>
+
     <div>
-        <p class="border"> 17 </p> <img src="{{video.image_like.url}}" width="50px" height="50px"/> <p class="border"> Atremii </p>
+        <p id="like_count"> 17 </p> <img id="like_icon" src="http://127.0.0.1:8000/static/img/like.jpg" width="25px" height="25px"/> <p id="name_author"> Atremii </p>
     </div>
 
 
 </div>
 
-
+</div>
 
 {% endfor %}
 
