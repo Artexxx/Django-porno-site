@@ -59,7 +59,7 @@
 <a href="http://127.0.0.1:8000/videos/id/{{video.id}}/">
     <div id="videosList">
         <div class="video">
-            <video class="thevideo" loop preload="none" width="300" height="200" muted="muted">
+            <video class="thevideo" loop preload="none" width="300" height="200" muted="muted" style="background-image: url('{{video.image.url}}');">
               <source src="{{video.video.url}}" type="video/mp4"/>
               Your browser does not support the video tag.
             </video>
