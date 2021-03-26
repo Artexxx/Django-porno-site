@@ -34,8 +34,13 @@
 
         #nazvanie_video{
             margin: 5px;
+            max-width: 300px;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
 
-            display: inline-block
         }
 
         #information{
@@ -44,7 +49,7 @@
         }
 
         #ramka_dlya_bolshogo_diva{
-
+                margin: 16px;
                 height: 300px;
                 display: inline-block
         }
@@ -70,7 +75,7 @@
 <div>
 
     <div>
-        <p id="like_count"> 17 </p> <img id="like_icon" src="http://127.0.0.1:8000/static/img/like.jpg" width="25px" height="25px"/> <p id="name_author"> Atremii </p>
+        <p id="like_count"> {{video.watched_like}} </p> <img id="like_icon" src="http://127.0.0.1:8000/static/img/like.jpg" width="25px" height="25px"/> <p id="name_author"> {{video.author}} </p>
     </div>
 
 
