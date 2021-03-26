@@ -20,7 +20,7 @@ def get_video(request, video_id):
     video = Video.objects.get(id=video_id)
 
     # Увеличичение количества просмотров
-    video.count_views += 1
+    video.views += 1
     video.save()
 
 
