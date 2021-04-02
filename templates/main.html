@@ -66,6 +66,8 @@
     </style>
 </head>
 
+
+
 <body>
 <button name="button" id="dark-mode-button">Dark Mode</button>
 {% for video in videos %}
@@ -93,11 +95,17 @@
     </div>
 
     <div>
-        <p> {{video.views}}</p>
+        <h2> {{video.views}}</h2>
     </div>
+<!--    <div>-->
+<!--        <form>-->
+<!--            <p><b>Оставьте комментарий:</b></p>-->
+<!--            <p><textarea rows="5" cols="45" name="comment"></textarea></p>-->
+<!--            <p><input type="submit"></p>-->
+<!--        </form>-->
+<!--    </div>-->
 
 </div>
-
 </div>
 
 {% endfor %}
