@@ -1,6 +1,6 @@
 venv/*
 .idea/*
-VideoSait/media/*
-VideoSait/static/*
+VideoSite/media/*
+VideoSite/static/*
 pyvenv.cfg
 db.sqlite3
