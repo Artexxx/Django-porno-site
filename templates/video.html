@@ -6,20 +6,51 @@
 <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
 <title>Gallery</title>
 <style>
-      .border {
+        .border {
             border: 1px solid #ff0000;
             display: inline-block
         }
 
         #like_count {
             margin-top: 0px;
+            margin-left: 290px;
+            display: inline-block
+        }
+        #dislike_count {
+            margin-top: 0px;
+            margin-left: 55px;
+            display: inline-block
+        }
+        #podel {
+            margin-top: 0px;
+            margin-left: 60px;
+            display: inline-block
+        }
+        #wath_count {
+            margin-top: 0px;
 
+            display: inline-block
+        }
+        #date {
+            margin-top: 0px;
+            margin-left: 15px;
             display: inline-block
         }
 
         #like_icon {
             margin-top: -25px;
-            margin-left: 15px;
+            margin-left: 500px;
+            position: absolute;
+        }
+
+        #dislike_icon {
+            margin-top: -25px;
+            margin-left: 585px;
+            position: absolute;
+        }
+        #podelitsia {
+            margin-top: -25px;
+            margin-left: 660px;
             position: absolute;
         }
 
@@ -63,28 +94,31 @@
 <div id="information">
   <p id="nazvanie_video">  {{video.title}} </p>
 </div>
+<!--<div>-->
+<!--  <p id="like_count"> {{video.likes}} </p> <img id="like_icon" src="http://127.0.0.1:8000/static/img/like.jpg" width="25px" height="25px"/> <p id="name_author"> {{video.author}} </p>-->
+<!--</div>-->
 <div>
-  <p id="like_count"> {{video.likes}} </p> <img id="like_icon" src="http://127.0.0.1:8000/static/img/like.jpg" width="25px" height="25px"/> <p id="name_author"> {{video.author}} </p>
+    <p id="wath_count"> {{video.views}} просмотров</p> <p id="date"> {{video.date}} </p> <img id="like_icon" src="http://127.0.0.1:8000/static/img/like.jpg" width="25px" height="25px"/> <p id="like_count"> {{video.likes}} </p> <img id="dislike_icon" src="http://127.0.0.1:8000/static/img/dislike.png" width="25px" height="25px"/> <p id="dislike_count"> {{video.dislikes}} </p> <img id="podelitsia" src="http://127.0.0.1:8000/static/img/podelitsia.png" width="45px" height="45px"/> <p id="podel">ПОДЕЛИТЬСЯ</p>
+    <p>【 АВТОР: {{video.author}} 】</p>
+    <p>↓</p>
+    <p style="white-space: pre-line">{{video.desc}}</p>
+    <p>↑</p>
 </div>
+
+
+
 <div>
-        <h2> {{video.views}}</h2>
-    </div>
-<div>
-
-
-
   <form method="get">
-              <p>
+                <p>
   <!--                <label for="comment">Ваш комментарий:</label><br/>-->
                   <textarea id="comment" name="comment" placeholder="Оставьте комментарий"
                       cols="45" rows="5"></textarea>
                   <p><input type="submit"></p>
 
 
-              </p>
-</form>
+                </p>
+    </form>
 </div>
 
 
-</div>
 </body>
