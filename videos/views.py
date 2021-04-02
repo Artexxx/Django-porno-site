@@ -23,9 +23,6 @@ def get_video(request, video_id):
     if not request.session.session_key:
         request.session.save()
 
-    print("request.session.session_key:",
-          request.session.session_key)
-
     # получаем сессию
     session_key = request.session.session_key
 
