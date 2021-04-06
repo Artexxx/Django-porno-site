@@ -4,16 +4,26 @@ from watch_analytics.models import  WatchAnalytics
 
 
 def get_videos(request):
+    template, context = get_template_context()
+
+    return render(request, template, context)
+
+def get_videos_sorted_by_rating(request):
+    template, context = get_template_context()
+    videos = context["videos"]
+    context["videos"] = videos.order_by('-rating')
+    return render(request, template, context)
+
+
+def get_template_context():
     template = "main.html"
 
     videos = Video.objects.all()
 
     context = {
         "videos": videos,
-     }
-
-    return render(request, template, context)
-
+    }
+    return template, context
 
 def get_video(request, video_id):
     template = "video.html"

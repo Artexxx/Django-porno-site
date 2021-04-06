@@ -6,6 +6,8 @@ class Video(Model):
     title = models.CharField(verbose_name="Название", max_length=100, default="")
     desc = models.TextField(verbose_name='Описание', max_length=1000, default='', blank=True)
 
+    rating = models.FloatField(verbose_name="Рейтинг", max_length=100, default=0, blank=True)
+
     image = models.FileField(verbose_name="Картика", upload_to="images")
     video = models.FileField(verbose_name="Видео", upload_to="videos")
     author = models.CharField(verbose_name="Автор", max_length=100, default="", blank=True)
@@ -18,4 +20,3 @@ class Video(Model):
 
     def __str__(self):
         return self.title
-
