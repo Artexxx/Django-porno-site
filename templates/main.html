@@ -3,9 +3,19 @@
 <html>
 
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+       $( document ).ready(function() {
+    var button = document.getElementById("dark-mode-button");
+    button.addEventListener("click",function(){
+        document.body.classList.toggle("dark-mode")
+        });
+     });
+    </script>
  <meta charset="UTF-8">
     <title>Title</title>
-
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/dark-mode.css">
     <style>
         .border {
             border: 1px solid #ff0000;
@@ -59,7 +69,7 @@
 
 
 <body>
-
+<button name="button" id="dark-mode-button">Dark Mode</button>
 {% for video in videos %}
 <div id="ramka_dlya_bolshogo_diva">
 
