@@ -1,114 +1,107 @@
-
-
 <html>
 
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-       $( document ).ready(function() {
-    var button = document.getElementById("dark-mode-button");
-    button.addEventListener("click",function(){
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      var button = document.getElementById("dark-mode-button");
+      button.addEventListener("click", function() {
         document.body.classList.toggle("dark-mode")
-        });
-     });
-    </script>
- <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="stylesheet" href="/static/css/dark-mode.css">
-    <style>
-        .border {
-            border: 1px solid #ff0000;
-            display: inline-block
-        }
+      });
+    });
+  </script>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/dark-mode.css">
+  <style>
+    .border {
+      border: 1px solid #ff0000;
+      display: inline-block
+    }
 
-        #like_count {
-            margin-top: 0px;
+    #like_count {
+      margin-top: 0px;
+      display: inline-block
+    }
 
-            display: inline-block
-        }
+    #like_icon {
+      margin-top: 0px;
+      margin-left: 5px;
+      position: absolute;
+    }
 
-        #like_icon {
-            margin-top: 0px;
-            margin-left: 5px;
-            position: absolute;
-        }
+    #name_author {
+      margin-top: 0px;
+      margin-left: 40px;
+      position: absolute;
+      display: inline-block
+    }
 
-        #name_author{
-            margin-top: 0px;
-            margin-left: 40px;
-            position: absolute;
+    #nazvanie_video {
+      margin: 5px;
+      max-width: 300px;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
 
-            display: inline-block
-        }
+    #information {
+      height: 50px;
+    }
 
-        #nazvanie_video{
-            margin: 5px;
-            max-width: 300px;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-
-        }
-
-        #information{
-
-                height: 50px;
-        }
-
-        #ramka_dlya_bolshogo_diva{
-                margin: 16px;
-                height: 300px;
-                display: inline-block
-        }
-    </style>
+    #ramka_dlya_bolshogo_diva {
+      margin: 16px;
+      height: 300px;
+      display: inline-block
+    }
+  </style>
 </head>
 
-
-
 <body>
-<button name="button" id="dark-mode-button">Dark Mode</button>
-{% for video in videos %}
-<div id="ramka_dlya_bolshogo_diva">
+  <button name="button" id="dark-mode-button">Dark Mode</button>
+  {% for video in videos %}
+  <div id="ramka_dlya_bolshogo_diva">
 
-<a href="http://127.0.0.1:8000/videos/id/{{video.id}}/">
-    <div id="videosList">
+    <a href="http://127.0.0.1:8000/videos/id/{{video.id}}/">
+      <div id="videosList">
         <div class="video">
-            <video class="thevideo" loop preload="none" width="300" height="200" muted="muted" style="background-image: url('{{video.image.url}}');">
-              <source src="{{video.video.url}}" type="video/mp4"/>
-              Your browser does not support the video tag.
-            </video>
+          <video class="thevideo" loop preload="none" width="300" height="200" muted="muted" style="background-image: url('{{video.image.url}}');">
+            <source src="{{video.video.url}}" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
+      </div>
+    </a>
+
+    <div id="information">
+      <p id="nazvanie_video"> {{video.title}} </p>
     </div>
-</a>
-
-
-<div id="information">
-  <p id="nazvanie_video">  {{video.title}} </p>
-</div>
-<div>
-
     <div>
-        <p id="like_count"> {{video.likes}} </p> <img id="like_icon" src="http://127.0.0.1:8000/static/img/like.jpg" width="25px" height="25px"/> <p id="name_author"> {{video.author}} </p>
-    </div>
 
-    <div>
+      <div>
+        <p id="like_count"> {{video.likes}} </p> <img id="like_icon" src="http://127.0.0.1:8000/static/img/like.jpg" width="25px" height="25px" />
+        <p id="name_author"> {{video.author}} </p>
+      </div>
+
+      <div>
         <h2> {{video.views}}</h2>
+      </div>
+      <!--    <div>-->
+      <!--        <form>-->
+      <!--            <p><b>Оставьте комментарий:</b></p>-->
+      <!--            <p><textarea rows="5" cols="45" name="comment"></textarea></p>-->
+      <!--            <p><input type="submit"></p>-->
+      <!--        </form>-->
+      <!--    </div>-->
+
     </div>
-<!--    <div>-->
-<!--        <form>-->
-<!--            <p><b>Оставьте комментарий:</b></p>-->
-<!--            <p><textarea rows="5" cols="45" name="comment"></textarea></p>-->
-<!--            <p><input type="submit"></p>-->
-<!--        </form>-->
-<!--    </div>-->
+  </div>
 
-</div>
-</div>
-
-{% endfor %}
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src="/static/js/hover_image_video.js"> </script>
+  {% endfor %}
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src="/static/js/hover_image_video.js"> </script>
 </body>

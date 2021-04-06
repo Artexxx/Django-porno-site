@@ -1,126 +1,137 @@
-
-
 <html>
 
 <head>
-<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
-<title>Gallery</title>
-<style>
-        .border {
-            border: 1px solid #ff0000;
-            display: inline-block
-        }
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/0.6.5/tailwind.min.css" rel="stylesheet" />
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 
-        #like_count {
-            margin-top: 0px;
-            margin-left: 290px;
-            display: inline-block
-        }
-        #dislike_count {
-            margin-top: 0px;
-            margin-left: 55px;
-            display: inline-block
-        }
-        #podel {
-            margin-top: 0px;
-            margin-left: 60px;
-            display: inline-block
-        }
-        #wath_count {
-            margin-top: 0px;
+  <title>Gallery</title>
+  <style>
+    .border {
+      border: 1px solid #ff0000;
+      display: inline-block
+    }
 
-            display: inline-block
-        }
-        #date {
-            margin-top: 0px;
-            margin-left: 15px;
-            display: inline-block
-        }
+    #like_count {
+      margin-top: 0px;
+      margin-left: 290px;
+      display: inline-block
+    }
 
-        #like_icon {
-            margin-top: -25px;
-            margin-left: 500px;
-            position: absolute;
-        }
+    #dislike_count {
+      margin-top: 0px;
+      margin-left: 55px;
+      display: inline-block
+    }
 
-        #dislike_icon {
-            margin-top: -25px;
-            margin-left: 585px;
-            position: absolute;
-        }
-        #podelitsia {
-            margin-top: -25px;
-            margin-left: 660px;
-            position: absolute;
-        }
+    #podel {
+      margin-top: 0px;
+      margin-left: 60px;
+      display: inline-block
+    }
 
-        #name_author{
-            margin-top: 0px;
-            margin-left: 40px;
-            position: absolute;
+    #wath_count {
+      margin-top: 0px;
+      display: inline-block
+    }
 
-            display: inline-block
-        }
+    #date {
+      margin-top: 0px;
+      margin-left: 15px;
+      display: inline-block
+    }
 
-        #nazvanie_video{
-            margin: 5px;
-            max-width: 300px;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+    #like_icon {
+      margin-top: -25px;
+      margin-left: 500px;
+      position: absolute;
+    }
 
-        }
+    #dislike_icon {
+      margin-top: -25px;
+      margin-left: 585px;
+      position: absolute;
+    }
 
-        #information{
+    #podelitsia {
+      margin-top: -25px;
+      margin-left: 660px;
+      position: absolute;
+    }
 
-                height: 50px;
-        }
+    #name_author {
+      margin-top: 0px;
+      margin-left: 40px;
+      position: absolute;
+      display: inline-block
+    }
 
-        #ramka_dlya_bolshogo_diva{
-                margin: 16px;
-                height: 300px;
-                display: inline-block
-        }
-        #vse{
-            margin-left: 40px;
-        }
-</style>
+    #nazvanie_video {
+      margin: 5px;
+      max-width: 300px;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    #information {
+      height: 50px;
+    }
+
+    #ramka_dlya_bolshogo_diva {
+      margin: 16px;
+      height: 300px;
+      display: inline-block
+    }
+
+    #vse {
+      margin-left: 40px;
+    }
+  </style>
 </head>
+
 <body>
-<video width="auto" height="720" controls>
-  <source src="{{video.video.url}}" type="video/mp4"/>
-  Your browser does not support the video tag.
-</video>
-<div id="vse">
+  <div style = 'max_width:800px'>
+  <video width="auto" height="720" controls>
+    <source src="{{video.video.url}}" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  <div id="vse">
     <div id="information">
-      <p id="nazvanie_video">  {{video.title}} </p>
+      <p id="nazvanie_video"> {{video.title}} </p>
     </div>
+    <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
+      <span class="hidden">Like</span>
+      <i class="fa fa-heart"></i>
+    </a>
     <!--<div>-->
     <!--  <p id="like_count"> {{video.likes}} </p> <img id="like_icon" src="http://127.0.0.1:8000/static/img/like.jpg" width="25px" height="25px"/> <p id="name_author"> {{video.author}} </p>-->
     <!--</div>-->
     <div>
-        <p id="wath_count"> {{video.views}} просмотров</p> <p id="date"> {{video.date}} </p> <img id="like_icon" src="http://127.0.0.1:8000/static/img/like.jpg" width="25px" height="25px"/> <p id="like_count"> {{video.likes}} </p> <img id="dislike_icon" src="http://127.0.0.1:8000/static/img/dislike.png" width="25px" height="25px"/> <p id="dislike_count"> {{video.dislikes}} </p> <img id="podelitsia" src="http://127.0.0.1:8000/static/img/podelitsia.png" width="45px" height="45px"/> <p id="podel">ПОДЕЛИТЬСЯ</p>
-        <p>【 АВТОР: {{video.author}} 】</p>
-        <p>↓</p>
-        <p style="white-space: pre-line">{{video.desc}}</p>
-        <p>↑</p>
+      <p id="wath_count"> {{video.views}} просмотров</p>
+      <p id="date"> {{video.date}} </p> <img id="like_icon" src="http://127.0.0.1:8000/static/img/like.jpg" width="25px" height="25px" />
+      <p id="like_count"> {{video.likes}} </p> <img id="dislike_icon" src="http://127.0.0.1:8000/static/img/dislike.png" width="25px" height="25px" />
+      <p id="dislike_count"> {{video.dislikes}} </p> <img id="podelitsia" src="http://127.0.0.1:8000/static/img/podelitsia.png" width="45px" height="45px" />
+      <p id="podel">ПОДЕЛИТЬСЯ</p>
+      <p>【 АВТОР: {{video.author}} 】</p>
+      <p>↓</p>
+      <p style="white-space: pre-line">{{video.desc}}</p>
+      <p>↑</p>
     </div>
-
-
-
+  </div>
     <div>
       <form method="get">
-          <p>
-      <!--                <label for="comment">Ваш комментарий:</label><br/>-->
-              <textarea id="comment" name="comment" placeholder="Оставьте комментарий" cols="45" rows="5"></textarea>
-              <p><input type="submit"></p>
+        <p>
+          <!--                <label for="comment">Ваш комментарий:</label><br/>-->
+          <textarea id="comment" name="comment" placeholder="Оставьте комментарий" cols="45" rows="5"></textarea>
+        <p><input type="submit"></p>
 
-
-          </p>
+        </p>
       </form>
     </div>
-</div>
+  </div>
 
 </body>
+
+</html>

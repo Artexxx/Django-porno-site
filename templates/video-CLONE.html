@@ -1,0 +1,956 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/0.6.5/tailwind.min.css" rel="stylesheet" />
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,600,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+    <title>Gallery</title>
+    <style>
+        @import url(//weloveiconfonts.com/api/?family=fontawesome);
+
+        [class*=fontawesome-]:before {
+            font-family: "FontAwesome", sans-serif;
+            font-weight: 400;
+        }
+
+        body {
+            background: #080b13;
+            font: 16px/1.5 "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        h2 {
+            font-weight: 400;
+            font-size: 1.5rem;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.5);
+            transition: all 0.5s;
+        }
+
+        a:hover {
+            box-shadow: inset 0px -24px 0px #61b5d9;
+        }
+
+        .wrapper {
+            margin: 0 auto;
+            padding: 0 1em;
+            max-width: 69rem;
+        }
+
+        .truncate,
+        .next-video-info,
+        .next-video-title,
+        .video-title {
+            box-sizing: border-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 100%;
+        }
+
+        /* Video area */
+        .video-area {
+            -webkit-animation-delay: 0.5s;
+            animation-delay: 0.5s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+            color: #fff;
+            padding: 4.5rem 0;
+        }
+
+        @-webkit-keyframes slidebottom {
+            0% {
+                transform: translate3d(0, 100%, 0);
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slidebottom {
+            0% {
+                transform: translate3d(0, 100%, 0);
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .video-column {
+            float: left;
+            max-width: 854px;
+        }
+
+        .video-player {
+            background: #000;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 480px;
+        }
+
+        .video {
+            display: block;
+            cursor: pointer;
+            width: 100%;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .video-playlist {
+            float: right;
+            font-size: 18px;
+            font-weight: 600;
+            max-width: 250px;
+        }
+
+        .video-header {
+            background: #61b5d9;
+            line-height: 1.5rem;
+            padding: 1.5rem;
+        }
+
+        .video-title {
+            float: left;
+            margin: 0;
+            width: auto;
+            max-width: 75%;
+        }
+
+        .video-author {
+            font-size: 18px;
+            float: left;
+            margin-left: 3rem;
+        }
+
+        .video-author a:hover {
+            box-shadow: inset 0px -24px 0px #f11753;
+        }
+
+        /* Video controls */
+        .video-controls {
+            box-sizing: border-box;
+            background: rgba(14, 32, 82, 0.8);
+            line-height: 3rem;
+            padding: 0 1.5rem;
+            position: absolute;
+            bottom: 0;
+            transform: translate3d(0, 3rem, 0);
+            width: 100%;
+            height: 3rem;
+            vertical-align: middle;
+            transition: transform 0.5s;
+        }
+
+        .video-controls button {
+            background: 0;
+            border: 0;
+            color: #fff;
+            font-size: 1.5rem;
+            width: 3rem;
+            height: 3rem;
+            vertical-align: middle;
+        }
+
+        .video-player:hover .video-controls {
+            transform: translate3d(0, 0, 0);
+        }
+
+        /* Seeker bar */
+        .video-bars {
+            background: rgba(8, 11, 19, 0.8);
+            display: inline-block;
+            margin: 0 1em;
+            position: relative;
+            width: 73%;
+            height: 8px;
+        }
+
+        .bar-seeker,
+        .bar-progress,
+        .bar-buffer {
+            position: absolute;
+            height: 8px;
+        }
+
+        .bar-seeker {
+            z-index: 1000;
+        }
+
+        .bar-progress {
+            z-index: 100;
+        }
+
+        .bar-buffer {
+            z-index: 10;
+        }
+
+        /*
+* Reset range input
+* https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css/
+*/
+        input[type=range] {
+            background: transparent;
+            cursor: pointer;
+            -webkit-appearance: none;
+            width: 100%;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            -webkit-appearance: none;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+        }
+
+        input[type=range]:focus {
+            outline: none;
+        }
+
+        input[type=range]::-ms-track {
+            width: 100%;
+            cursor: pointer;
+            background: transparent;
+            border-color: transparent;
+            color: transparent;
+        }
+
+        .bar-seeker::-ms-fill-lower {
+            background: transparent;
+        }
+
+        .bar-seeker::-ms-fill-upper {
+            background: transparent;
+        }
+
+        /* Style the seeker bar */
+        .bar-seeker::-webkit-slider-runnable-track {
+            background: transparent;
+            height: 8px;
+            padding: 0;
+        }
+
+        .bar-seeker::-moz-range-track {
+            background: transparent;
+            height: 8px;
+            padding: 0;
+        }
+
+        .bar-seeker::-ms-track {
+            background: transparent;
+            height: 8px;
+            padding: 0;
+        }
+
+        .bar-seeker::-webkit-slider-thumb {
+            background: #f11753;
+            border: 0;
+            border-radius: 100%;
+            width: 18px;
+            height: 18px;
+            margin-top: -4px;
+        }
+
+        .bar-seeker::-moz-range-thumb {
+            background: #f11753;
+            border: 0;
+            border-radius: 100%;
+            width: 18px;
+            height: 18px;
+            margin-top: -4px;
+        }
+
+        .bar-seeker::-ms-thumb {
+            background: #f11753;
+            border: 0;
+            border-radius: 100%;
+            width: 18px;
+            height: 18px;
+            margin-top: -4px;
+        }
+
+        @media all and (-ms-high-contrast: none),
+        (-ms-high-contrast: active) {
+
+            /* IE, still a little idiot */
+            .bar-seeker {
+                height: 24px;
+                margin-top: -5px;
+                padding: 0;
+                vertical-align: middle;
+            }
+        }
+
+        input.slider-volume {
+            position: absolute;
+            bottom: 36px;
+            right: -40px;
+            width: 6rem;
+            opacity: 0;
+            transform: rotate(-90deg) scaleX(0);
+            transform-origin: left;
+            transition: all 1s;
+        }
+
+        .slider-volume::-webkit-slider-runnable-track {
+            background: rgba(14, 32, 82, 0.9);
+            height: 20px;
+        }
+
+        .slider-volume::-moz-range-track {
+            background: rgba(14, 32, 82, 0.9);
+            height: 20px;
+        }
+
+        .slider-volume::-ms-track {
+            background: rgba(14, 32, 82, 0.9);
+            height: 20px;
+        }
+
+        .slider-volume::-webkit-slider-thumb {
+            background: #f11753;
+            border: 0;
+            width: 8px;
+            height: 24px;
+            margin-top: -2px;
+        }
+
+        .slider-volume::-moz-range-thumb {
+            background: #f11753;
+            border: 0;
+            width: 8px;
+            height: 24px;
+            margin-top: -2px;
+        }
+
+        .slider-volume::-ms-thumb {
+            background: #f11753;
+            border: 0;
+            width: 8px;
+            height: 24px;
+            margin-top: -2px;
+        }
+
+        .btn-sound:hover+.slider-volume,
+        .slider-volume:hover {
+            opacity: 1;
+            transform: rotate(-90deg) scaleX(1);
+        }
+
+        /* Progress bars */
+        /* Reset bar */
+        progress {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.2);
+            border: none;
+            height: 8px;
+            width: 100%;
+        }
+
+        progress::-webkit-progress-bar {
+            background: transparent;
+        }
+
+        progress::-webkit-progress-value {
+            background: transparent;
+        }
+
+        /* Buffer bar styling */
+        .bar-buffer::-webkit-progress-value {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .bar-buffer::-moz-progress-bar {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Progress bar styling */
+        .bar-progress::-webkit-progress-value {
+            background: #f11753;
+        }
+
+        .bar-progress::-moz-progress-bar {
+            background: #f11753;
+        }
+
+        .bar-progress {
+            color: #f11753;
+        }
+
+        /* Replay button */
+        .btn-replay {
+            background: none;
+            border: none;
+            display: none;
+            color: #f11753;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -110px;
+            margin-top: -110px;
+            font-size: 9rem;
+            width: 220px;
+            height: 220px;
+        }
+
+        /* Time bubble for seeker bar */
+        .time-bubble {
+            background: #61b5d9;
+            border-radius: 1.5rem 1.5rem 0px;
+            height: 1.5rem;
+            line-height: 1.5rem;
+            position: absolute;
+            bottom: 3.2rem;
+            left: 4.8rem;
+            padding: 0.5em;
+            display: none;
+        }
+
+        /* PLaylist */
+        .playlist-title {
+            background: #0e2052;
+            padding: 16.5px;
+            max-height: 60px;
+        }
+
+        .next-video {
+            display: block;
+            height: 140px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .next-video img {
+            display: block;
+        }
+
+        .next-video::before {
+            background: linear-gradient(0deg, rgba(14, 32, 82, 0.9) 0%, transparent 60%);
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transition: all 0.5s;
+        }
+
+        .next-video-title {
+            position: absolute;
+            transform: translateY(-4.5rem);
+            padding: 0.75rem 1.5rem;
+            transition: all 0.5s;
+        }
+
+        .next-video-info {
+            box-sizing: border-box;
+            font-size: 14px;
+            font-weight: 400;
+            padding: 0.75rem 1.5rem;
+            position: absolute;
+            transform: translateY(-6.75rem);
+            transition: all 0.5s;
+            opacity: 0;
+            width: 100%;
+        }
+
+        .next-video:hover .next-video-title {
+            transform: translateY(-9.75rem);
+        }
+
+        .next-video:hover::before {
+            background: rgba(14, 32, 82, 0.8);
+        }
+
+        .next-video:hover .next-video-info {
+            opacity: 1;
+        }
+
+        .played-video {
+            transform: scale(0);
+            height: 0;
+            width: 0;
+        }
+
+        .video-popularity {
+            font-size: 18px;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .video-popularity,
+        .description {
+            padding: 0 1.5rem;
+        }
+
+        .likes {
+            padding-left: 1em;
+            padding-right: 1em;
+        }
+
+        /* Like icon styling */
+        .like-this {
+            box-shadow: none;
+            color: #f11753;
+        }
+
+        .like-this:hover {
+            -webkit-animation: beat 1s infinite;
+            animation: beat 1s infinite;
+            box-shadow: none;
+        }
+
+        @-webkit-keyframes beat {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.5);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes beat {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.5);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .meta-icon {
+            padding-left: 0.5em;
+        }
+
+        .like-prompt {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.7rem;
+            padding-left: 0.75em;
+            position: absolute;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.25s;
+        }
+
+        .wiggle {
+            -webkit-animation: wiggle 0.5s;
+            animation: wiggle 0.5s;
+            -webkit-animation-iteration-count: 4;
+            animation-iteration-count: 4;
+        }
+
+        .wiggle+.like-prompt {
+            transform: scaleX(1);
+        }
+
+        @-webkit-keyframes wiggle {
+            0% {
+                transform: translateY(2px);
+            }
+
+            50% {
+                transform: translateY(-2px);
+            }
+
+            100% {
+                transform: translateY(2px);
+            }
+        }
+
+        @keyframes wiggle {
+            0% {
+                transform: translateY(2px);
+            }
+
+            50% {
+                transform: translateY(-2px);
+            }
+
+            100% {
+                transform: translateY(2px);
+            }
+        }
+
+        .info-area {
+            background: #fff;
+            color: #080b13;
+        }
+
+        .info-heading {
+            color: #61b5d9;
+            font-size: 3rem;
+            font-weight: 300;
+            text-align: center;
+            margin: 4.5rem auto;
+        }
+
+        .clearfix:before,
+        .wrapper:before,
+        .video-header:before,
+        .clearfix:after,
+        .wrapper:after,
+        .video-header:after {
+            content: " ";
+            display: table;
+        }
+
+        .clearfix:after,
+        .wrapper:after,
+        .video-header:after {
+            clear: both;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="site-content">
+
+        <section class="video-area">
+            <div class="wrapper">
+
+                <header class="video-header">
+                    <h2 class="video-title">Lana Rhoades ждёт зубодробильный трах.</h2>
+                    <small class="video-author">By the <a href="TODO">Corvus</a></small>
+                </header>
+
+                <div class="video-column">
+                    <div class="video-player">
+                        <button id="btnReplay" class="btn-replay"><span class="fontawesome-refresh"></span></button>
+
+                        <video id="video" class="video" src="https://cdn1.vids69.com/video/52/4/51304/51304.mp4" type="video/mp4" poster="https://img.ebacdn.com/videos_screenshots/64000/64053/640x360/1.jpg" preload="none">
+                        </video>
+
+                        <div class="video-controls">
+
+                            <button id="btnState"><span class="fontawesome-play"></span></button>
+
+                            <span id="timePlayed">00:00</span>
+
+                            <!-- Seeker + progress bar -->
+                            <div class="video-bars">
+                                <input type="range" id="barSeeker" class="bar-seeker" value="0" min="0" max="100" step="0.1">
+                                <progress value="0" max="100" step="0.1" id="barProgress" class="bar-progress"></progress>
+                                <progress value="0" max="100" step="0.1" id="barBuffer" class="bar-buffer"></progress>
+                            </div>
+
+                            <div id="timeBubble" class="time-bubble">00:00</div>
+
+                            <span id="timeDuration">00:00</span>
+
+                            <button id="btnSound" class="btn-sound"><span class="fontawesome-volume-up"></span></button>
+                            <input type="range" id="sliderVolume" class="slider-volume" value="10" min="0" max="10">
+
+                        </div>
+
+                    </div>
+
+                    <div class="video-info">
+
+                        <p class="video-popularity">
+                            <span class="views">394,7304 views <span class="fontawesome-eye-open meta-icon"></span>
+                                <span class="likes">97,349 likes
+                                  <a href="#" id="likeThis" class="like-this">
+                                       <span class="fontawesome-heart meta-icon like-heart"></span>
+                                  </a>
+                                  <span class="like-prompt">Don't forget to like!</span>
+                                </span></span>
+                        </p>
+
+                        <div class="description">
+                            <h4>Lana Rhoades настолько фотогенична что её нужно немедленно выебать, даже зубодробильный трах не сломит эту красотку.</h4>
+                        </div>
+
+                        <div class="description">
+                            <p>Красивые девушки как раз и созданы для того, чтобы их ебали и в хвост и в гриву. Другая бы затряслась от страха, но Lana Rhoades с нетерпением ждёт зубодробильный трах и назло всем хейтерам выдержит его с высоко поднятой головой. Престиж никак нельзя ронять, иначе на карьере можно будет поставить крест.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="video-playlist" class="video-playlist">
+                    <header class="playlist-title">Смотрите дальше ...</header>
+
+                    <!-- HTML 5 allows us to wrap block-level elements in <a> tags. -->
+
+                    <a href="https://cdn1.vids69.com/video/52/4/51304/51304.mp4" class="next-video">
+                        <img src="https://img.ebacdn.com/videos_screenshots/64000/64053/640x360/1.jpg" alt="">
+                        <h3 class="next-video-title">Caminandes: Llama Drama - Short Movie</h3>
+                        <p class="next-video-info">By the Blender Foundation
+                            <br>01:30
+                            <br><span class="next-video-description">Caminandes is a Creative Commons movie made by Pablo Vazquez, Beorn Leonard, and Francesco Siddi. Music and Sound by Jan Morgenstern.</span>
+                        </p>
+                    </a>
+
+                    <a href="https://cdn1.vids69.com/video/52/4/51304/51304.mp4" class="next-video">
+                        <img src="https://img.ebacdn.com/videos_screenshots/64000/64053/640x360/2.jpg" alt="">
+                        <h3 class="next-video-title">Big Buck Bunny</h3>
+                        <p class="next-video-info">By the Blender Foundation
+                            <br>09:57
+                            <br><span class="next-video-description">Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself. When one sunny day three rodents rudely harass him, something snaps... and the rabbit ain't no bunny anymore! In the typical cartoon tradition he prepares the nasty rodents a comical revenge.</span>
+                        </p>
+                    </a>
+
+                    <a href="https://cdn1.vids69.com/video/52/4/51304/51304.mp4" class="next-video">
+                        <img src="https://img.ebacdn.com/videos_screenshots/64000/64053/640x360/3.jpg" alt="">
+                        <h3 class="next-video-title">Sintel - Third Open Movie by Blender Foundation</h3>
+                        <p class="next-video-info">By the Blender Foundation
+                            <br>14:48<br>
+                            <span class="next-video-description">"Sintel" is an independently produced short film, initiated by the Blender Foundation as a means to further improve and validate the free/open source 3D creation suite Blender. With initial funding provided by 1000s of donations via the internet community, it has again proven to be a viable development model for both open 3D technology as for independent animation film.</span>
+                        </p>
+                    </a>
+
+                    <a href="https://cdn1.vids69.com/video/52/4/51304/51304.mp4" class="next-video played-video">
+                        <img src="https://img.ebacdn.com/videos_screenshots/64000/64053/640x360/4.jpg" alt="">
+                        <h3 class="next-video-title">Caminandes: Grand Dillama</h3>
+                        <p class="next-video-info">By the Blender Foundation
+                            <br>00:00<br>
+                            <span class="next-video-description">Caminandes: Episode 2 is an Open Movie produced by Blender Institute in Amsterdam, the Netherlands. You can support the makers and open source projects by purchasing the 8 GB USB card with all the movie data and tutorials.</span>
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+<script type="text/javascript">
+/*
+TODO:
+    Clean up this mess, please
+*/
+
+var videoPlayer = function(){
+    "use strict";
+
+    function el(id) {
+        return document.getElementById(id);
+    }
+
+    var vid = el("video"),
+
+        btnState = el("btnState"),
+        btnReplay = el("btnReplay"),
+        btnSound = el("btnSound"),
+        sliderVolume = el("sliderVolume"),
+
+        barSeeker = el("barSeeker"),
+        barBuffer = el("barBuffer"),
+        barProgress = el("barProgress"),
+
+        timePlayed = el("timePlayed"),
+        timeDuration = el("timeDuration"),
+        timeBubble = el("timeBubble"),
+
+        thePosition,
+        theMinutes,
+        theSeconds,
+        theTime;
+
+    var readableTime = function(t) {
+        theMinutes = "0" + Math.floor(t / 60); // Divide seconds to get minutes, add leading zero
+        theSeconds = "0" + parseInt(t % 60); // Get remainder seconds
+        theTime = theMinutes.slice(-2) + ":" + theSeconds.slice(-2); // Slice to two spots to remove excess zeros
+        return theTime;
+    };
+
+    /* Video controls */
+
+    var togglePlay = function(){
+        if(vid.paused) {
+            vid.play();
+            btnState.firstElementChild.className = "fontawesome-pause";
+            btnReplay.style.display = "none";
+            vid.style.opacity = 1;
+        } else {
+            vid.pause();
+            btnState.firstElementChild.className = "fontawesome-play";
+        }
+    };
+
+    var toggleSound = function(){
+        if(vid.muted) {
+            vid.muted = false;
+            sliderVolume.value = 10;
+            btnSound.firstElementChild.className = "fontawesome-volume-up";
+        } else {
+            vid.muted = true;
+            sliderVolume.value = 0;
+            btnSound.firstElementChild.className = "fontawesome-volume-off";
+        }
+    };
+
+    /* Update seeker value and time played */
+    var updateTimeDisplay = function() {
+        var timePercent = (100 / vid.duration) * vid.currentTime;
+        barSeeker.value = timePercent;
+        barProgress.value = timePercent;
+        timePlayed.innerHTML = readableTime(vid.currentTime);
+    };
+
+    var replayVideo = function() {
+        vid.currentTime = 0;
+        btnState.firstElementChild.className = "fontawesome-pause";
+        el("likeThis").classList.remove("wiggle");
+        btnReplay.style.display = "none";
+        vid.play();
+    };
+
+    /* Event listeners */
+
+    // Toggle buttons
+    vid.addEventListener("click",togglePlay);
+    btnState.addEventListener("click",togglePlay);
+    btnSound.addEventListener("click",toggleSound);
+
+    // Volume slider
+    sliderVolume.addEventListener("change", function() {
+        var theVolume = sliderVolume.value / 10;
+        vid.volume = theVolume;
+
+        if(theVolume === 0) {
+            btnSound.firstElementChild.className = "fontawesome-volume-off";
+        } else if (theVolume === 1) {
+            btnSound.firstElementChild.className = "fontawesome-volume-up";
+        } else {
+            btnSound.firstElementChild.className = "fontawesome-volume-down";
+        }
+    });
+
+    // Replay button, something needs fixing, but I forget what
+    vid.addEventListener("ended", function(){
+        btnReplay.style.display = "block";
+        btnState.firstElementChild.className = "fontawesome-play";
+    });
+
+
+    /* Event listeners for the seek bar */
+
+    // Move seeker bar
+    vid.addEventListener("timeupdate",updateTimeDisplay);
+
+    // Allow click on seeker to change video position
+    barSeeker.addEventListener("change", function() {
+        thePosition = vid.duration * (barSeeker.value / 100);
+        vid.currentTime = thePosition;
+    });
+
+    // Pause video and seeker update while seeker is being interacted with
+    barSeeker.addEventListener("mousedown",function(){
+        vid.pause();
+        vid.removeEventListener("timeupdate",updateTimeDisplay);
+    });
+
+    barSeeker.addEventListener("mouseup",function(){
+        vid.play();
+        btnState.firstElementChild.className = "fontawesome-pause";
+        vid.addEventListener("timeupdate",updateTimeDisplay);
+    });
+
+    // Buffer bar
+    vid.addEventListener("timeupdate", function() {
+        var bufferPercent = (100 / vid.duration) * vid.buffered.end(vid.buffered.length - 1);
+        barBuffer.value = bufferPercent;
+    });
+
+    // Video length
+    vid.addEventListener('loadeddata', function(){
+        timeDuration.innerHTML = readableTime(vid.duration);
+    });
+
+    // Time bubble on seeker
+    var bubblePop = function(e){
+        var cursorPos = (e.clientX - (barSeeker.getBoundingClientRect().left)) / (barSeeker.offsetWidth);
+        var seekTime = cursorPos * vid.duration;
+
+        if(seekTime) {
+            timeBubble.innerHTML = readableTime(seekTime);
+            timeBubble.style.left = (e.clientX - barSeeker.getBoundingClientRect().left + 78) + "px";
+            timeBubble.style.display = "block";
+        }
+    };
+
+    barSeeker.addEventListener("mousemove", bubblePop);
+
+    barSeeker.addEventListener("mouseout", function(){
+        timeBubble.style.display = "none";
+    });
+
+    vid.addEventListener("timeupdate", function(){
+        theTime = parseInt(vid.currentTime);
+        if(vid.duration - theTime < 10 && vid.duration - theTime > 9 ) {
+            el("likeThis").classList.add("wiggle");
+        }
+    });
+
+// Video playlist
+var playlistAnchor = document.querySelectorAll(".next-video"),
+    imageURL = document.querySelectorAll(".next-video img");
+
+var prevTitle = document.querySelector(".video-title"),
+    prevDescription = document.querySelector(".description");
+
+    for (var i = 0; i < 4; i++) {
+        (function(){
+            var k = i;
+
+            playlistAnchor[i].addEventListener("click", function(e){
+                e.preventDefault();
+
+                var playedVideo = document.querySelector(".played-video");
+                playedVideo.classList.remove("slide");
+                playedVideo.classList.remove("played-video");
+
+                // Update video
+                vid.poster = imageURL[k].src;
+                vid.src = playlistAnchor[k].href;
+
+                // Update info
+                prevTitle.innerHTML = this.querySelector(".next-video-title").textContent;
+                prevDescription.innerHTML = this.querySelector(".next-video-description").textContent;
+
+                // Reset and play video
+                replayVideo();
+
+                this.classList.add("played-video");
+                playedVideo.classList.add("slide");
+
+                setTimeout(function(){
+                    playlistAnchor[k].parentNode.appendChild(playlistAnchor[k]);
+                }, 500);
+            });
+
+        }());
+    }
+
+}();
+ </script>
+</body>
+
+</html>
