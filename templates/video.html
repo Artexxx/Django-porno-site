@@ -83,6 +83,9 @@
                 height: 300px;
                 display: inline-block
         }
+        #vse{
+            margin-left: 40px;
+        }
 </style>
 </head>
 <body>
@@ -90,35 +93,34 @@
   <source src="{{video.video.url}}" type="video/mp4"/>
   Your browser does not support the video tag.
 </video>
+<div id="vse">
+    <div id="information">
+      <p id="nazvanie_video">  {{video.title}} </p>
+    </div>
+    <!--<div>-->
+    <!--  <p id="like_count"> {{video.likes}} </p> <img id="like_icon" src="http://127.0.0.1:8000/static/img/like.jpg" width="25px" height="25px"/> <p id="name_author"> {{video.author}} </p>-->
+    <!--</div>-->
+    <div>
+        <p id="wath_count"> {{video.views}} просмотров</p> <p id="date"> {{video.date}} </p> <img id="like_icon" src="http://127.0.0.1:8000/static/img/like.jpg" width="25px" height="25px"/> <p id="like_count"> {{video.likes}} </p> <img id="dislike_icon" src="http://127.0.0.1:8000/static/img/dislike.png" width="25px" height="25px"/> <p id="dislike_count"> {{video.dislikes}} </p> <img id="podelitsia" src="http://127.0.0.1:8000/static/img/podelitsia.png" width="45px" height="45px"/> <p id="podel">ПОДЕЛИТЬСЯ</p>
+        <p>【 АВТОР: {{video.author}} 】</p>
+        <p>↓</p>
+        <p style="white-space: pre-line">{{video.desc}}</p>
+        <p>↑</p>
+    </div>
 
-<div id="information">
-  <p id="nazvanie_video">  {{video.title}} </p>
+
+
+    <div>
+      <form method="get">
+          <p>
+      <!--                <label for="comment">Ваш комментарий:</label><br/>-->
+              <textarea id="comment" name="comment" placeholder="Оставьте комментарий" cols="45" rows="5"></textarea>
+              <p><input type="submit"></p>
+
+
+          </p>
+      </form>
+    </div>
 </div>
-<!--<div>-->
-<!--  <p id="like_count"> {{video.likes}} </p> <img id="like_icon" src="http://127.0.0.1:8000/static/img/like.jpg" width="25px" height="25px"/> <p id="name_author"> {{video.author}} </p>-->
-<!--</div>-->
-<div>
-    <p id="wath_count"> {{video.views}} просмотров</p> <p id="date"> {{video.date}} </p> <img id="like_icon" src="http://127.0.0.1:8000/static/img/like.jpg" width="25px" height="25px"/> <p id="like_count"> {{video.likes}} </p> <img id="dislike_icon" src="http://127.0.0.1:8000/static/img/dislike.png" width="25px" height="25px"/> <p id="dislike_count"> {{video.dislikes}} </p> <img id="podelitsia" src="http://127.0.0.1:8000/static/img/podelitsia.png" width="45px" height="45px"/> <p id="podel">ПОДЕЛИТЬСЯ</p>
-    <p>【 АВТОР: {{video.author}} 】</p>
-    <p>↓</p>
-    <p style="white-space: pre-line">{{video.desc}}</p>
-    <p>↑</p>
-</div>
-
-
-
-<div>
-  <form method="get">
-                <p>
-  <!--                <label for="comment">Ваш комментарий:</label><br/>-->
-                  <textarea id="comment" name="comment" placeholder="Оставьте комментарий"
-                      cols="45" rows="5"></textarea>
-                  <p><input type="submit"></p>
-
-
-                </p>
-    </form>
-</div>
-
 
 </body>
