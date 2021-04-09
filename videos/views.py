@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from videos.models import Video
+from videos.models import Video, VideoCategory
 from watch_analytics.models import  WatchAnalytics
 
 
@@ -19,9 +19,11 @@ def get_template_context():
     template = "main.html"
 
     videos = Video.objects.all()
+    categories = VideoCategory.objects.all()
 
     context = {
         "videos": videos,
+        "categories": categories,
     }
     return template, context
 
