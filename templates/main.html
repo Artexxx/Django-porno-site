@@ -72,7 +72,11 @@
 <div>
     <button name="button" id="dark-mode-button">Dark Mode</button>
 </div>
+{% for category in categories %}
+<p>{{category.name}} </p>
 
+
+{% endfor %}
 {% for video in videos %}
 <div id="ramka_dlya_bolshogo_diva">
 
