@@ -23,7 +23,7 @@
         }
         #podel {
             margin-top: 0px;
-            margin-left: 60px;
+            margin-left: 70px;
             display: inline-block
         }
         #wath_count {
@@ -38,19 +38,19 @@
         }
 
         #like_icon {
-            margin-top: -25px;
-            margin-left: 500px;
+            margin-top: 0px;
+            margin-left: -30px;
             position: absolute;
         }
 
         #dislike_icon {
-            margin-top: -25px;
-            margin-left: 585px;
+            margin-top: 0px;
+            margin-left: -30px;
             position: absolute;
         }
         #podelitsia {
-            margin-top: -25px;
-            margin-left: 660px;
+            margin-top: 0px;
+            margin-left: -50px;
             position: absolute;
         }
 
@@ -101,7 +101,19 @@
     <!--  <p id="like_count"> {{video.likes}} </p> <img id="like_icon" src="http://127.0.0.1:8000/static/img/like.jpg" width="25px" height="25px"/> <p id="name_author"> {{video.author}} </p>-->
     <!--</div>-->
     <div>
-        <p id="wath_count"> {{video.views}} просмотров</p> <p id="date"> {{video.date}} </p> <img id="like_icon" src="http://127.0.0.1:8000/static/img/like.jpg" width="25px" height="25px"/> <p id="like_count"> {{video.likes}} </p> <img id="dislike_icon" src="http://127.0.0.1:8000/static/img/dislike.png" width="25px" height="25px"/> <p id="dislike_count"> {{video.dislikes}} </p> <img id="podelitsia" src="http://127.0.0.1:8000/static/img/podelitsia.png" width="45px" height="45px"/> <p id="podel">ПОДЕЛИТЬСЯ</p>
+        <p id="wath_count"> {{video.views}} просмотров</p>
+
+        <p id="date"> {{video.date}} </p>
+
+        <p id="like_count"><img id="like_icon" src="http://127.0.0.1:8000/static/img/like.jpg" width="25px" height="25px"/>
+         {{video.likes}} </p>
+
+        <p id="dislike_count"><img id="dislike_icon" src="http://127.0.0.1:8000/static/img/dislike.png" width="25px" height="25px"/>
+         {{video.dislikes}} </p>
+
+        <p id="podel"><img id="podelitsia" src="http://127.0.0.1:8000/static/img/podelitsia.png" width="45px" height="45px"/>
+        ПОДЕЛИТЬСЯ</p>
+
         <p>【 АВТОР: {{video.author}} 】</p>
         <p>↓</p>
         <p style="white-space: pre-line">{{video.desc}}</p>
