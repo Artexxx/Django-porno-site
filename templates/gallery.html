@@ -1,0 +1,127 @@
+<html>
+
+<head>
+  <link href="https://unpkg.com/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+
+  <title>Gallery</title>
+<style>
+  body {background:gray !important;}
+</style>
+</head>
+
+<body>
+  <div style = 'max_width:800px'>
+  <video width="auto" height="720" controls>
+    <source src="{{video.video.url}}" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  <div id="vse">
+    <div id="information">
+      <p id="nazvanie_video"> {{video.title}} </p>
+    </div>
+    <a class="no-underline text-grey-darker hover:text-red-dark" href="#">
+      <span class="hidden">Like</span>
+      <i class="fa fa-heart"></i>
+    </a>
+    <!--<div>-->
+    <!--  <p id="like_count"> {{video.likes}} </p> <img id="like_icon" src="http://127.0.0.1:8000/static/img/like.jpg" width="25px" height="25px"/> <p id="name_author"> {{video.author}} </p>-->
+    <!--</div>-->
+    <div>
+      <p id="wath_count"> {{video.views}} просмотров</p>
+      <p id="date"> {{video.date}} </p> <img id="like_icon" src="http://127.0.0.1:8000/static/img/like.jpg" width="25px" height="25px" />
+      <p id="like_count"> {{video.likes}} </p> <img id="dislike_icon" src="http://127.0.0.1:8000/static/img/dislike.png" width="25px" height="25px" />
+      <p id="dislike_count"> {{video.dislikes}} </p> <img id="podelitsia" src="http://127.0.0.1:8000/static/img/podelitsia.png" width="45px" height="45px" />
+      <p id="podel">ПОДЕЛИТЬСЯ</p>
+      <p>【 АВТОР: {{video.author}} 】</p>
+      <p>↓</p>
+      <p style="white-space: pre-line">{{video.desc}}</p>
+      <p>↑</p>
+    </div>
+  </div>
+    <div>
+      <form method="get">
+        <p>
+          <!--                <label for="comment">Ваш комментарий:</label><br/>-->
+          <textarea id="comment" name="comment" placeholder="Оставьте комментарий" cols="45" rows="5"></textarea>
+        <p><input type="submit"></p>
+
+        </p>
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+<div class="heading text-center font-bold text-2xl m-5 text-gray-100">Full Responsive Video Cards</div>
+
+<div class="holder mx-auto w-10/12 grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+
+  <div class="each mb-10 m-2 shadow-lg border-gray-800 bg-gray-100 relative">
+    <img class="w-full" src="https://img-l3.xvideos-cdn.com/videos/thumbs169ll/3b/1f/73/3b1f7344debeef529b14949f9910d96a/3b1f7344debeef529b14949f9910d96a.7.jpg" alt="" />
+    <div class="badge absolute top-0 right-0 bg-red-500 m-1 text-gray-200 p-1 px-2 text-xs font-bold rounded">Live</div>
+    <div class="info-box text-xs flex p-1 font-semibold text-gray-500 bg-gray-300">
+      <span class="mr-1 p-1 px-2 font-bold">105 Watching</span>
+      <span class="mr-1 p-1 px-2 font-bold border-l border-gray-400">105 Likes</span>
+      <span class="mr-1 p-1 px-2 font-bold border-l border-gray-400">105 Dislikes</span>
+    </div>
+    <div class="desc p-4 text-gray-800">
+      <a href="https://www.youtube.com/watch?v=dvqT-E74Qlo" target="_new" class="title font-bold block cursor-pointer hover:underline">Pubg Mobile Custom Room (Unlimited)</a>
+      <a href="https://www.youtube.com/user/sam14319" target="_new" class="badge bg-indigo-500 text-blue-100 rounded px-1 text-xs font-bold cursor-pointer">@dynamo_gaming</a>
+      <span class="description text-sm block py-2 border-gray-400 mb-2">lorem ipsum bekhum bukhum !lorem ipsum bekhum bukhum !</span>
+    </div>
+  </div>
+  <!-- each -->
+  <div class="each mb-10 m-2 shadow-lg border-gray-800 bg-gray-100 relative">
+    <img class="w-full" src="https://i.ytimg.com/vi/qew27BNl7io/maxresdefault.jpg" alt="" />
+    <div class="badge absolute top-0 right-0 bg-indigo-500 m-1 text-gray-200 p-1 px-2 text-xs font-bold rounded">10:53</div>
+    <div class="info-box text-xs flex p-1 font-semibold text-gray-500 bg-gray-300">
+      <span class="mr-1 p-1 px-2 font-bold">105 views</span>
+      <span class="mr-1 p-1 px-2 font-bold border-l border-gray-400">105 Likes</span>
+      <span class="mr-1 p-1 px-2 font-bold border-l border-gray-400">105 Dislikes</span>
+    </div>
+    <div class="desc p-4 text-gray-800">
+      <a href="https://www.youtube.com/watch?v=dvqT-E74Qlo" target="_new" class="title font-bold block cursor-pointer hover:underline">Pubg Mobile Custom Room (Unlimited)</a>
+      <a href="https://www.youtube.com/user/sam14319" target="_new" class="badge bg-indigo-500 text-blue-100 rounded px-1 text-xs font-bold cursor-pointer">@dynamo_gaming</a>
+      <span class="description text-sm block py-2 border-gray-400 mb-2">lorem ipsum bekhum bukhum !lorem ipsum bekhum bukhum !</span>
+    </div>
+  </div>
+  <!-- each -->
+  <div class="each mb-10 m-2 shadow-lg border-gray-800 bg-gray-100 relative">
+    <img class="w-full" src="https://i.ytimg.com/vi/qew27BNl7io/maxresdefault.jpg" alt="" />
+    <div class="badge absolute top-0 right-0 bg-indigo-500 m-1 text-gray-200 p-1 px-2 text-xs font-bold rounded">10:53</div>
+    <div class="info-box text-xs flex p-1 font-semibold text-gray-500 bg-gray-300">
+      <span class="mr-1 p-1 px-2 font-bold">105 views</span>
+      <span class="mr-1 p-1 px-2 font-bold border-l border-gray-400">105 Likes</span>
+      <span class="mr-1 p-1 px-2 font-bold border-l border-gray-400">105 Dislikes</span>
+    </div>
+    <div class="desc p-4 text-gray-800">
+      <a href="https://www.youtube.com/watch?v=dvqT-E74Qlo" target="_new" class="title font-bold block cursor-pointer hover:underline">Pubg Mobile Custom Room (Unlimited)</a>
+      <a href="https://www.youtube.com/user/sam14319" target="_new" class="badge bg-indigo-500 text-blue-100 rounded px-1 text-xs font-bold cursor-pointer">@dynamo_gaming</a>
+      <span class="description text-sm block py-2 border-gray-400 mb-2">lorem ipsum bekhum bukhum !lorem ipsum bekhum bukhum !</span>
+    </div>
+  </div>
+  <!-- each -->
+  <div class="each mb-10 m-2 shadow-lg border-gray-800 bg-gray-100 relative">
+    <img class="w-full" src="https://i.ytimg.com/vi/qew27BNl7io/maxresdefault.jpg" alt="" />
+    <div class="badge absolute top-0 right-0 bg-indigo-500 m-1 text-gray-200 p-1 px-2 text-xs font-bold rounded">10:53</div>
+    <div class="info-box text-xs flex p-1 font-semibold text-gray-500 bg-gray-300">
+      <span class="mr-1 p-1 px-2 font-bold">105 views</span>
+      <span class="mr-1 p-1 px-2 font-bold border-l border-gray-400">105 Likes</span>
+      <span class="mr-1 p-1 px-2 font-bold border-l border-gray-400">105 Dislikes</span>
+    </div>
+    <div class="desc p-4 text-gray-800">
+      <a href="https://www.youtube.com/watch?v=dvqT-E74Qlo" target="_new" class="title font-bold block cursor-pointer hover:underline">Pubg Mobile Custom Room (Unlimited)</a>
+      <a href="https://www.youtube.com/user/sam14319" target="_new" class="badge bg-indigo-500 text-blue-100 rounded px-1 text-xs font-bold cursor-pointer">@dynamo_gaming</a>
+      <span class="description text-sm block py-2 border-gray-400 mb-2">lorem ipsum bekhum bukhum !lorem ipsum bekhum bukhum !</span>
+    </div>
+  </div>
+  <!-- each -->
+
+
+</div>
+</body>
+
+</html>
